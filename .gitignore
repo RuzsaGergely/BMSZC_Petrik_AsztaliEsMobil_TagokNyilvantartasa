@@ -1,0 +1,9 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/BMSZC_Petrik_AsztaliEsMobil_TagokNyilvantartas/v17
+/.vs
+/TagokDesktop/.vs
+/TagokDesktop/TagokDesktop/bin/Debug/net6.0-windows
+/TagokDesktop/TagokDesktop/obj
