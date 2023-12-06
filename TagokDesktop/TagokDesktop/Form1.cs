@@ -48,7 +48,16 @@ namespace TagokDesktop
 
             if (ujtag.Szulev != 0 && ujtag.Irszam != 0 && ujtag.Orsz != "" && ujtag.Azon != 0 && ujtag.Nev != "")
             {
-                DBKapcsolat.TagHozzaadasa(ujtag);
+                bool returnvalue = DBKapcsolat.TagHozzaadasa(ujtag);
+                if (!returnvalue)
+                {
+                    MessageBox.Show("A mentés sikertelen volt!", "Hiba", MessageBoxButtons.OK);
+                }
+                else
+                {
+                    MessageBox.Show("A mentés sikeres volt!", "Siker", MessageBoxButtons.OK);
+                }
+                TagokLekerdezes();
             }
         }
 
@@ -69,7 +78,39 @@ namespace TagokDesktop
 
         private void ValtozasokMentese()
         {
-            
+            int errors = 0;
+            if(tagok_original.Count > tagok.Count)
+            {
+                foreach (var item in tagok_original)
+                {
+                    if(!tagok.Any(x=>x.Azon == item.Azon))
+                    {
+                        bool returnvalue = DBKapcsolat.TagTorlese(item.Azon);
+                        if (!returnvalue) errors++;
+                    }
+                }
+            }
+            for (int i = 0; i < tagok.Count; i++)
+            {
+                try
+                {
+                    if (!tagok[i].IsEqual(tagok_original[i]))
+                    {
+                        bool returnvalue = DBKapcsolat.TagFrissitese(tagok_original[i].Azon, tagok[i]);
+                        if (!returnvalue) errors++;
+                    }
+                }
+                catch { }
+            }
+
+            if (errors > 0)
+            {
+                MessageBox.Show("Nem minden lekérdezés futott le eredményesen! Hibás sorok száma: " + errors, "Hiba", MessageBoxButtons.OK);
+            }
+            else
+            {
+                MessageBox.Show("Minden lekérdezés eredményesen futott le!", "Siker", MessageBoxButtons.OK);
+            }
         }
     }
 }

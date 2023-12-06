@@ -15,5 +15,17 @@ namespace TagokDesktop
         // Minimum 4 karakter de bármennyi
         public int Irszam { get; set; }
         public string Orsz {  get; set; }
+
+        public bool IsEqual(Tag ObjectToCompare)
+        {
+            if(ObjectToCompare.Azon == this.Azon 
+                && ObjectToCompare.Nev == this.Nev
+                && ObjectToCompare.Szulev == this.Szulev
+                && ObjectToCompare.Irszam == this.Irszam
+                && ObjectToCompare.Orsz == this.Orsz)
+            { return true; }
+
+            return false;
+        }
     }
 }

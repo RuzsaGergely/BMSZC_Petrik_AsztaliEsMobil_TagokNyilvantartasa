@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace TagokDesktop
 {
@@ -57,6 +58,39 @@ namespace TagokDesktop
             {
                 return true;
             } else
+            {
+                return false;
+            }
+        }
+
+        public bool TagFrissitese(int Azon, Tag tag)
+        {
+            if(Azon != tag.Azon)
+            {
+                return false;
+            }
+            string update_string = $"UPDATE `ugyfel` SET `nev`='{tag.Nev}',`szulev`='{tag.Szulev}',`irszam`='{tag.Irszam}',`orsz`='{tag.Orsz}' WHERE `azon`={Azon}";
+            MySqlCommand command = new MySqlCommand(update_string, sqlConnection);
+
+            if (command.ExecuteNonQuery() > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public bool TagTorlese(int Azon)
+        {
+            string update_string = $"DELETE FROM `ugyfel` WHERE `azon`={Azon}";
+            MySqlCommand command = new MySqlCommand(update_string, sqlConnection);
+
+            if (command.ExecuteNonQuery() > 0)
+            {
+                return true;
+            }
+            else
             {
                 return false;
             }
