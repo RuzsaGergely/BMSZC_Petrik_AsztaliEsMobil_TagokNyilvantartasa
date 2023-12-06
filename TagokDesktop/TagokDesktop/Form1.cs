@@ -6,6 +6,7 @@ namespace TagokDesktop
     {
         // Figyelem! Binding listnek kell lennie hogy manipuálni lehessen! https://learn.microsoft.com/en-us/dotnet/desktop/winforms/controls/using-the-row-for-new-records-in-the-windows-forms-datagridview-control?view=netframeworkdesktop-4.8
         private BindingList<Tag> tagok = new BindingList<Tag>();
+        private List<Tag> tagok_original = new List<Tag>();
         private DBKapcsolat DBKapcsolat { get; set; }
         public Form1()
         {
@@ -23,6 +24,7 @@ namespace TagokDesktop
         private void TagokLekerdezes()
         {
             tagok = new BindingList<Tag>(DBKapcsolat.TagokLekerdezese());
+            tagok_original = new List<Tag>(DBKapcsolat.TagokLekerdezese());
             dataGridView1.DataSource = tagok;
         }
 
@@ -57,7 +59,17 @@ namespace TagokDesktop
 
         private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-           
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            ValtozasokMentese();
+        }
+
+        private void ValtozasokMentese()
+        {
+            
         }
     }
 }

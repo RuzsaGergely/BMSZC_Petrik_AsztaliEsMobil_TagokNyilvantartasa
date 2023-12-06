@@ -32,6 +32,7 @@
             label1 = new Label();
             label2 = new Label();
             button1 = new Button();
+            button2 = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -74,11 +75,22 @@
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
+            // button2
+            // 
+            button2.Location = new Point(427, 455);
+            button2.Name = "button2";
+            button2.Size = new Size(122, 23);
+            button2.TabIndex = 5;
+            button2.Text = "Változások mentése";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(680, 516);
+            Controls.Add(button2);
             Controls.Add(button1);
             Controls.Add(label2);
             Controls.Add(label1);
@@ -97,5 +109,6 @@
         private Label label1;
         private Label label2;
         private Button button1;
+        private Button button2;
     }
 }
